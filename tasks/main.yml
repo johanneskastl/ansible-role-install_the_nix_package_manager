@@ -1,0 +1,15 @@
+---
+# install_the_nix_package_manager/tasks/main.yml
+
+- name: 'Download the determinate.systems nix installer'
+  ansible.builtin.get_url:
+    url: 'https://install.determinate.systems/nix'
+    dest: '/root/nix-installer.sh'
+    owner: 'root'
+    group: 'root'
+    mode: '0755'
+
+- name: 'Run the nix-installer'
+  ansible.builtin.command:
+    cmd: '/root/nix-installer.sh install --no-confirm'
+    creates: /nix/
